@@ -7,7 +7,7 @@ def main():
 
     while True:
         client,addr  = server_socket.accept()
-        client.send("HTTP/1.1 200 OK\r\n\r\n".encode("utf-8"))
+        client.send("HTTP".encode("utf-8"))
         client.close()
 
 
