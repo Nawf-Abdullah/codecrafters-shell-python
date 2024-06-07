@@ -6,17 +6,23 @@ def main():
     server_socket = socket.create_server(("localhost", 4221))
 
 
-    client,addr  = server_socket.accept()
-    data = client.recv(1024)
-
-    decoded_data = data.decode().split("\r\n")
-
-    response = b"HTTP/1.1 200 OK\r\n\r\n"
-
-    if decoded_data[0].split(" ")[1] != "/":
+    conn,addr  = server_socket.accept()
+    with conn:
+        val = conn.recv(1024)
+        pars = val.decode()
+        args = pars.split("\r\n")
         response = b"HTTP/1.1 404 Not Found\r\n\r\n"
-    client.sendall(response)
-    client.close()
+        if len(args) > 1:
+            path = args[0].split(" ")
+            if path[1] == "/":
+                response = b"HTTP/1.1 200 OK\r\n\r\n"
+            if "echo" in path[1]:
+                string = path[1].strip("/echo/")
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string}".encode()
+            print(f"First par {path}")
+        print(f"Received: {val}")
+        conn.sendall(response)
+
 
 
 if __name__ == "__main__":
