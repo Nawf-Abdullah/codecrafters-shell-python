@@ -21,7 +21,7 @@ def main():
                 
                 response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string}".encode()
             if 'user-agent' in path[1]:
-                code = args[2].strip("User-Agent: ")
+                code = args[3].strip("User-Agent: ")
                 response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(code)}\r\n\r\n{code}".encode()
                 
             print(f"First par {path}")
