@@ -1,13 +1,9 @@
 # Uncomment this to pass the first stage
 import socket
+import threading
 
 
-def main():
-    server_socket = socket.create_server(("localhost", 4221))
-
-
-    conn,addr  = server_socket.accept()
-    with conn:
+def c_handler(conn,addr):
         val = conn.recv(1024)
         pars = val.decode()
         args = pars.split("\r\n")
@@ -32,6 +28,13 @@ def main():
         print(f"Received: {val}")
         conn.sendall(response)
 
+
+def main():
+    server_socket = socket.create_server(("localhost", 4221))
+
+    while True:
+        conn,addr  = server_socket.accept()
+        threading.Thread(target=c_handler, args=(conn, addr)).start()
 
 
 if __name__ == "__main__":
