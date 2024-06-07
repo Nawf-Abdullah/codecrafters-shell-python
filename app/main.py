@@ -20,10 +20,13 @@ def main():
                 string = path[1].strip("/echo/")
                 
                 response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string}".encode()
-            if 'user-agent' in path[1]:
-                code = args[3].strip("User-Agent: ")
-                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(code)}\r\n\r\n{code}".encode()
-                
+            # if 'user-agent' in path[1]:
+            #     code = args[3].strip("User-Agent: ")
+            #     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(code)}\r\n\r\n{code}".encode()
+            elif path[1].startswith("/user-agent"):
+                user_agent = args[3].split(": ")[1]
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}".encode()
+                print("Agent:"+user_agent)
             print(f"First par {path}")
 
         print(f"Received: {val}")
