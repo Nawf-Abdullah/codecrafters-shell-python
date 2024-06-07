@@ -3,13 +3,12 @@ import socket
 
 
 def main():
-    # You can use print statements as follows for debugging, they'll be visible when running tests.
-    print("Logs from your program will appear here!")
+    server_socket = socket.create_server(("localhost", 4221))
 
-    # Uncomment this to pass the first stage
-    #
-    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
-    server_socket.accept() # wait for client
+    while True:
+        client,addr  = server_socket.accept()
+        client.send("HTTP/1.1 200 OK\r\n\r\n".encode("utf-8"))
+        client.close()
 
 
 if __name__ == "__main__":
