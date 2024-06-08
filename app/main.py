@@ -40,7 +40,7 @@ def c_handler(conn,addr):
                         x = f.read()
                         print('content',x)
                         content_length = len(x)
-                        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
+                        response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
                         print(x)
                 except FileNotFoundError:
                     response = 'HTTP/1.1 404 Not Found\r\n\r\n'.encode()
