@@ -41,7 +41,7 @@ def c_handler(conn,addr):
                     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string[1])}\r\n\r\n{string[1]}".encode()
                 else:
                     x = gzip.compress(bytes(string[1], 'utf-8'))
-                    response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(x)}\r\n\r\n{x}".encode()
+                    response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(x)}\r\n\r\n{x}".encode()
                     
             # if 'user-agent' in path[1]:
             #     code = args[3].strip("User-Agent: ")
@@ -71,7 +71,7 @@ def c_handler(conn,addr):
                             response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
                         else:
                             encodeX =  gzip.compress(bytes(x, 'utf-8'))
-                            response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(encodeX)}\r\n\r\n{encodeX}".encode()
+                            response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Encoding: gzip\r\nContent-Length: {len(encodeX)}\r\n\r\n{encodeX}".encode()
                         print(x)
                 except FileNotFoundError:
                     response = 'HTTP/1.1 404 Not Found\r\n\r\n'.encode()
