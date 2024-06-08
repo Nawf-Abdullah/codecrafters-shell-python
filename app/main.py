@@ -54,8 +54,10 @@ def c_handler(conn,addr):
                 response = 'HTTP/1.1 201 Created\r\n\r\n'.encode()
                 
                 #THE ARGS  ['POST /files/file_123 HTTP/1.1', 'Host: localhost:4221', 'User-Agent: curl/8.4.0', 'Accept: */*', 'Content-Type: application/octet-stream', 'Content-Length: 5', '', '12345']
+            valid_encoding = ['gzip']
             for i in args:
-                if i.startswith('Accept-Encoding:'):
+
+                if i.startswith('Accept-Encoding:') and i.split(':')[1] in valid_encoding:
                     print('Encoding value',i.split(':')[1])
                     response = response.decode().split('\r\n')
                     response.insert(-2,f'Content-Encoding: {i.split(':')[1]}',)
