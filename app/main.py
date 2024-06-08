@@ -9,8 +9,8 @@ def check_encode(encodings_list):
     valid_encoding = ['gzip']
     splited = encodings_list.split(',')
     print('SPLITTED ARRAY:',splited)
-    for i in splited.strip(' '):
-        if i in valid_encoding:
+    for i in splited:
+        if i.strip(' ') in valid_encoding:
             return True
     return False
 
