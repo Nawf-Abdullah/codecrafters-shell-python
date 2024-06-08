@@ -57,8 +57,8 @@ def c_handler(conn,addr):
             for i in args:
                 if i.startswith('Accept-Encoding:'):
                     response = response.decode().split('\r\n')
-                    response.insert(-2,f'Content-Encoding: {i.strip('Accept-Encoding:')}'.encode(),)
-                    response = '\r\n'.join(response)
+                    response.insert(-2,f'Content-Encoding: {i.strip('Accept-Encoding:')}',)
+                    response = '\r\n'.join(response).encode()
                     break
 
             print(f"First par {path}")
