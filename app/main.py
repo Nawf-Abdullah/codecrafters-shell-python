@@ -56,7 +56,7 @@ def c_handler(conn,addr):
                 #THE ARGS  ['POST /files/file_123 HTTP/1.1', 'Host: localhost:4221', 'User-Agent: curl/8.4.0', 'Accept: */*', 'Content-Type: application/octet-stream', 'Content-Length: 5', '', '12345']
             for i in args:
                 if i.startswith('Accept-Encoding:'):
-                    print('Encoding value',i.strip('Accept-Encoding:'))
+                    print('Encoding value',i.split('Accept-Encoding:')[0])
                     response = response.decode().split('\r\n')
                     response.insert(-2,f'Content-Encoding: {i.strip('Accept-Encoding:')}',)
                     response = '\r\n'.join(response).encode()
