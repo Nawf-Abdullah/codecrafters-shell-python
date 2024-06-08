@@ -34,7 +34,7 @@ def c_handler(conn,addr):
                 print(sys.argv)
                 try:
                     print('path:',path)
-                    with open(f'../tmp/{path[7:]}') as f:
+                    with open(f'{sys.argv[2]}/{path[2][7:]}') as f:
                         x = f.read()
                         print('content',x)
                         content_length = len(x)
