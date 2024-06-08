@@ -35,8 +35,8 @@ def c_handler(conn,addr):
                 try:
                     print('path:',path)
                     newp = args[0].split(" ")[1]
-                    print(f'path to file : {sys.argv[2]}/{args[7:]}')
-                    with open(f'{sys.argv[2]}/{args[7:]}') as f:
+                    print(f'path to file : {sys.argv[2]}/{newp[7:]}')
+                    with open(f'{sys.argv[2]}/{newp[7:]}') as f:
                         x = f.read()
                         print('content',x)
                         content_length = len(x)
