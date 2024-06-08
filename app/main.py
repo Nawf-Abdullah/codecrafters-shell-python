@@ -41,6 +41,7 @@ def c_handler(conn,addr):
                     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string[1])}\r\n\r\n{string[1]}".encode()
                 else:
                     x = gzip.compress(bytes(string[1], 'utf-8'))
+                    print('ENCODED DATA: ',x)
                     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(x)}\r\n\r\n{x}".encode()
                     
             # if 'user-agent' in path[1]:
