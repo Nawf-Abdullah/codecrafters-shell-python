@@ -24,9 +24,9 @@ def c_handler(conn,addr):
             if path[1] == "/":
                 response = b"HTTP/1.1 200 OK\r\n\r\n"
             if "echo" in path[1]:
-                string = path[1].strip("/echo/")
+                string = path[1].split("/echo/")
                 
-                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string}".encode()
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string[1]}".encode()
             # if 'user-agent' in path[1]:
             #     code = args[3].strip("User-Agent: ")
             #     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(code)}\r\n\r\n{code}".encode()
