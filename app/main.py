@@ -29,10 +29,21 @@ def c_handler(conn,addr):
                 
                 response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}".encode()
                 print("Agent:"+user_agent)
+            elif path[1].startswith('/files'):
+                try:
+                    with open(f'./tmp/{path[1].split('/')[-1]}.txt') as f:
+                        x = f.read()
+                        content_length = len(x)
+                        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
+                        print(x)
+                except FileExistsError:
+                    response = 'HTTP/1.1 404 Not Found\r\n\r\n'.encode()
+            
             print(f"First par {path}")
+            
 
         print(f"Received: {val}")
-        conn.sendall(response)
+        conn.send(response)
 
 
 def main():
