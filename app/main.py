@@ -33,7 +33,7 @@ def c_handler(conn,addr):
             elif path[1].startswith('/files'):
                 print(sys.argv)
                 try:
-                    print('path:'+path[7:])
+                    print('path:',path)
                     with open(f'../tmp/{path[7:]}') as f:
                         x = f.read()
                         print('content',x)
