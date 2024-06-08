@@ -36,7 +36,7 @@ def c_handler(conn,addr):
                         content_length = len(x)
                         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
                         print(x)
-                except FileExistsError:
+                except FileNotFoundError:
                     response = 'HTTP/1.1 404 Not Found\r\n\r\n'.encode()
             
             print(f"First par {path}")
