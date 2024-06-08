@@ -30,10 +30,11 @@ def c_handler(conn,addr):
                 
                 response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}".encode()
                 print("Agent:"+user_agent)
-            elif path[1].startswith('/files'):
+            elif path[1].startswith('/files') and path[0]=='GET':
                 print(sys.argv)
                 try:
                     print('path:',path)
+                    print('The Argss:',args)
                     newp = args[0].split(" ")[1]
                     print(f'path to file : {sys.argv[2]}/{newp[7:]}')
                     with open(f'{sys.argv[2]}/{newp[7:]}') as f:
@@ -44,7 +45,14 @@ def c_handler(conn,addr):
                         print(x)
                 except FileNotFoundError:
                     response = 'HTTP/1.1 404 Not Found\r\n\r\n'.encode()
-            
+            elif path[1].startswith('/files') and path[0]=='POST':
+                print('THE ARGS ', args)
+                newp = args[0].split(" ")[1]
+                print(f'path to file : {sys.argv[2]}/{newp[7:]}')
+                with open(f'{sys.argv[2]}/{newp[7:]}',"w") as f:
+                    f.write(args[-1])
+                response = 'HTTP/1.1 201 Created\r\n\r\n'.encode()
+                #THE ARGS  ['POST /files/file_123 HTTP/1.1', 'Host: localhost:4221', 'User-Agent: curl/8.4.0', 'Accept: */*', 'Content-Type: application/octet-stream', 'Content-Length: 5', '', '12345']
             print(f"First par {path}")
             
 
