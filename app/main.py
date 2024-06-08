@@ -31,7 +31,7 @@ def c_handler(conn,addr):
                 print("Agent:"+user_agent)
             elif path[1].startswith('/files'):
                 try:
-                    with open(f'./tmp/{path[1].split('/')[-1]}.txt') as f:
+                    with open(f'../tmp/{path[1].split('/')[-1]}.txt') as f:
                         x = f.read()
                         content_length = len(x)
                         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
