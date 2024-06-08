@@ -27,7 +27,7 @@ def c_handler(conn,addr):
                 string = path[1].split("/echo/")
                 print('THE DIVIDED SHIT:',string)
                 
-                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string)}\r\n\r\n{string[1]}".encode()
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(string[1])}\r\n\r\n{string[1]}".encode()
             # if 'user-agent' in path[1]:
             #     code = args[3].strip("User-Agent: ")
             #     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(code)}\r\n\r\n{code}".encode()
