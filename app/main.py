@@ -8,6 +8,7 @@ import sys
 def check_encode(encodings_list):
     valid_encoding = ['gzip']
     splited = encodings_list.split(',')
+    print('SPLITTED ARRAY:',splited)
     for i in splited:
         if i in valid_encoding:
             return True
