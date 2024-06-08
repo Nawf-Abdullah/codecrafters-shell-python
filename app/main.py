@@ -11,8 +11,8 @@ def check_encode(encodings_list):
     print('SPLITTED ARRAY:',splited)
     for i in splited:
         if i.strip(' ') in valid_encoding:
-            return i
-    return None
+            return True
+    return False
 
 def c_handler(conn,addr):
         val = conn.recv(1024)
@@ -70,7 +70,7 @@ def c_handler(conn,addr):
                 if i.startswith('Accept-Encoding:') and  check_encode(i.split(':')[1].strip(' ')):
                     print('Encoding value',i.split(':')[1])
                     response = response.decode().split('\r\n')
-                    response.insert(-2,f'Content-Encoding: {check_encode(i.split(':')[1].strip(' '))}',)
+                    response.insert(-2,f'Content-Encoding: gzip',)
                     response = '\r\n'.join(response).encode()
                     break
 
