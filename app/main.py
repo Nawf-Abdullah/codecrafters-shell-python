@@ -36,6 +36,7 @@ def c_handler(conn,addr):
                     print('path:'+path[7:])
                     with open(f'../tmp/{path[7:]}') as f:
                         x = f.read()
+                        print('content',x)
                         content_length = len(x)
                         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {content_length}\r\n\r\n{x}".encode()
                         print(x)
